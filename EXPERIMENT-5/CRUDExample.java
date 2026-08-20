@@ -9,11 +9,11 @@ public class CRUDExample {
 
 	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/testdb";
 	private static final String USERNAME = "root";
-	private static final String PASSWORD = "Wrong@123";
+	private static final String PASSWORD = "bvrit";
 
 	public static void main(String[] args) {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			//Class.forName("com.mysql.cj.jdbc.Driver");
 //Step1: Establishing a connection
 			Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
 //Step2: Creating a statement
@@ -28,9 +28,7 @@ public class CRUDExample {
 //Step4:Closingresources
 			statement.close();
 			connection.close();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -64,3 +62,11 @@ public class CRUDExample {
 		statement.executeUpdate(updateQuery);
 		System.out.println("Record updated successfully.");
 	}
+
+//Deletearecordfromthe database
+	private static void deleteRecord(Statement statement, int id) throws SQLException {
+		String deleteQuery = "DELETE FROM employee WHERE id=" + id;
+		statement.executeUpdate(deleteQuery);
+		System.out.println("Record deleted successfully.");
+	}
+}
