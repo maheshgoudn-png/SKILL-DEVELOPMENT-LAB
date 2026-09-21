@@ -140,22 +140,6 @@ You have been logged out successfully.
 | Typical use | Small client-side data/identifiers | Login and server-side user state |
 | Termination | Expiry/max-age | `session.invalidate()` |
 
-## Important Note
-The transaction records in this demonstration are hard-coded. They are used to demonstrate session tracking and are not permanently stored in a database. A future version can connect the servlet to MySQL and retrieve transaction records for each logged-in user.
-
-## Viva Questions
-1. What is session tracking?
-2. Why is session tracking required in HTTP?
-3. What is a cookie?
-4. Where is a cookie stored?
-5. What is `HttpSession`?
-6. Where is session information maintained?
-7. How do you create a session?
-8. How do you store data in a session?
-9. How do you retrieve data from a session?
-10. How do you invalidate a session?
-11. What is the difference between Cookies and HTTP Session?
-12. What happens when a session expires?
 
 ## Result
 The Cookies and HTTP Session session-tracking mechanisms were successfully implemented using Java Servlets, and the user's transaction history was displayed across requests.
