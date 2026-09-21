@@ -1,6 +1,71 @@
 package com.sessiontracking;
-import java.io.*; import jakarta.servlet.*; import jakarta.servlet.annotation.WebServlet; import jakarta.servlet.http.*;
-@WebServlet("/cookieHistory") public class CookieHistoryServlet extends HttpServlet { protected void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException{
- String username="Guest"; Cookie[] cs=req.getCookies(); if(cs!=null)for(Cookie c:cs)if("username".equals(c.getName())){username=c.getValue();break;}
- res.setContentType("text/html"); PrintWriter o=res.getWriter(); o.println("<html><body><h2>Cookie - Transaction History</h2><p>User: <b>"+username+"</b></p>"); table(o); o.println("</body></html>"); }
- private void table(PrintWriter o){o.println("<table border='1' cellpadding='10'><tr><th>Transaction ID</th><th>Product</th><th>Amount</th></tr><tr><td>TXN001</td><td>Laptop</td><td>₹55,000</td></tr><tr><td>TXN002</td><td>Keyboard</td><td>₹1,500</td></tr></table>");}}
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/cookieHistory")
+public class CookieHistoryServlet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String username = "Guest";
+
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+
+            for (Cookie cookie : cookies) {
+
+                if (cookie.getName().equals("username")) {
+                    username = cookie.getValue();
+                }
+            }
+        }
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<html>");
+        out.println("<head><title>Transaction History</title></head>");
+        out.println("<body>");
+
+        out.println("<h2>Transaction History</h2>");
+
+        out.println("<p>User: <b>" + username + "</b></p>");
+
+        out.println("<table border='1' cellpadding='10'>");
+
+        out.println("<tr>");
+        out.println("<th>Transaction ID</th>");
+        out.println("<th>Product</th>");
+        out.println("<th>Amount</th>");
+        out.println("</tr>");
+
+        out.println("<tr>");
+        out.println("<td>TXN001</td>");
+        out.println("<td>Laptop</td>");
+        out.println("<td>₹55,000</td>");
+        out.println("</tr>");
+
+        out.println("<tr>");
+        out.println("<td>TXN002</td>");
+        out.println("<td>Keyboard</td>");
+        out.println("<td>₹1,500</td>");
+        out.println("</tr>");
+
+        out.println("</table>");
+
+        out.println("</body>");
+        out.println("</html>");
+    }
+}
