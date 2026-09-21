@@ -1,0 +1,5 @@
+package com.sessiontracking;
+import java.io.*; import jakarta.servlet.*; import jakarta.servlet.annotation.WebServlet; import jakarta.servlet.http.*;
+@WebServlet("/sessionHistory") public class SessionHistoryServlet extends HttpServlet { protected void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException{
+ HttpSession s=req.getSession(false); res.setContentType("text/html"); PrintWriter o=res.getWriter(); o.println("<html><body>");
+ if(s==null||s.getAttribute("username")==null)o.println("<h3>Session expired or not available. Please login again.</h3><a href='index.html'>Login Again</a>"); else {String u=(String)s.getAttribute("username"); o.println("<h2>HTTP Session - Transaction History</h2><p>User: <b>"+u+"</b></p><table border='1' cellpadding='10'><tr><th>Transaction ID</th><th>Product</th><th>Amount</th></tr><tr><td>TXN001</td><td>Laptop</td><td>₹55,000</td></tr><tr><td>TXN002</td><td>Keyboard</td><td>₹1,500</td></tr></table><br><a href='logout'>Logout</a>");} o.println("</body></html>"); }}
