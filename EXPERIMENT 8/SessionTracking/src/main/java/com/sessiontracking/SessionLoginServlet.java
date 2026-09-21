@@ -1,5 +1,44 @@
 package com.sessiontracking;
-import java.io.*; import jakarta.servlet.*; import jakarta.servlet.annotation.WebServlet; import jakarta.servlet.http.*;
-@WebServlet("/sessionLogin") public class SessionLoginServlet extends HttpServlet { protected void doPost(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException{
- String username=req.getParameter("username"); HttpSession s=req.getSession(); s.setAttribute("username",username); res.setContentType("text/html"); PrintWriter o=res.getWriter();
- o.println("<html><body><h2>HTTP Session Tracking</h2><p>Welcome, <b>"+username+"</b></p><a href='sessionHistory'>View Transaction History</a></body></html>"); }}
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+@WebServlet("/sessionLogin")
+public class SessionLoginServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,
+                           HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String username = request.getParameter("username");
+
+        // Create session
+        HttpSession session = request.getSession();
+
+        // Store username in session
+        session.setAttribute("username", username);
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<html>");
+        out.println("<body>");
+
+        out.println("<h2>HTTP Session Tracking</h2>");
+
+        out.println("<p>Welcome <b>" + username + "</b></p>");
+
+        out.println("<a href='sessionHistory'>View Transaction History</a>");
+
+        out.println("</body>");
+        out.println("</html>");
+    }
+}
